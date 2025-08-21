@@ -226,11 +226,11 @@ const Portfolio: React.FC = () => {
   const [active, setActive] = useState("All");
   const [query, setQuery] = useState("");
   const [poemOpen, setPoemOpen] = useState(false);
-  const [poemItem, setPoemItem] = useState(null);
+  const [poemItem, setPoemItem] = useState<PortfolioItem | null>(null);
 
   const filtered = useFiltered(portfolioItems, query, active);
 
-  function openPoem(item) {
+  function openPoem(item: PortfolioItem) {
     setPoemItem(item);
     setPoemOpen(true);
   }
