@@ -1,5 +1,3 @@
-import Image from "next/image";
-
 import Portfolio from "@/components/Portfolio";
 export default function Page() {
   return <Portfolio />;

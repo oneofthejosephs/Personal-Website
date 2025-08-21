@@ -22,8 +22,18 @@ import { BookText, Brain, Code2, ExternalLink, Github, Linkedin, Mail, Search } 
 // 3) Export this page into your framework (e.g., Next.js app) or keep as a single-page site.
 // 4) Optional: Convert poems to Markdown or keep them as strings.
 // -------------------------
+type PortfolioItem = {
+  id: string;
+  category: "Data Science" | "Poetry" | "Projects" | string;
+  title: string;
+  summary?: string;
+  tags?: string[];
+  links?: { demo?: string; repo?: string; paper?: string };
+  details?: string;
+  poem?: string;
+};
 
-const portfolioItems = [
+const portfolioItems:PortfolioItem[] = [
   // 🧠 Data Science
   {
     id: "ds-ecg",
@@ -134,7 +144,7 @@ function Header() {
   );
 }
 
-function useFiltered(items, query, activeCategory) {
+function useFiltered(items:PortfolioItem[], query:string, activeCategory:string) {
   return useMemo(() => {
     const q = query.trim().toLowerCase();
     return items.filter((item) => {
@@ -149,7 +159,7 @@ function useFiltered(items, query, activeCategory) {
   }, [items, query, activeCategory]);
 }
 
-function ItemCard({ item, onOpenPoem }) {
+function ItemCard({ item, onOpenPoem }: {item: PortfolioItem;onOpenPoem: (item: PortfolioItem) => void;}) {
   const isPoem = item.category === "Poetry" && item.poem;
   return (
     <motion.div
@@ -219,11 +229,6 @@ const Portfolio: React.FC = () => {
   const [poemItem, setPoemItem] = useState(null);
 
   const filtered = useFiltered(portfolioItems, query, active);
-
-  const ActiveIcon = useMemo(() => {
-    const meta = categories.find((c) => c.key === active);
-    return meta?.icon ?? undefined;
-  }, [active]);
 
   function openPoem(item) {
     setPoemItem(item);
