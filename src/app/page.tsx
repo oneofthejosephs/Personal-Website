@@ -1,7 +1,7 @@
 import Image from "next/image";
 
+import Portfolio from "@/components/Portfolio";
 export default function Page() {
-  const Portfolio = require("@/components/Portfolio").default;
   return <Portfolio />;
 }
 
