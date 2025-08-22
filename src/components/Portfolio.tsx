@@ -115,17 +115,17 @@ function Header() {
         </div>
         <div className="flex gap-2">
           <Button asChild variant="outline" className="rounded-2xl">
-            <a href="#" aria-label="GitHub">
+            <a href="https://github.com/oneofthejosephs" aria-label="GitHub">
               <Github className="h-4 w-4 mr-2" /> GitHub
             </a>
           </Button>
           <Button asChild variant="outline" className="rounded-2xl">
-            <a href="#" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/akanimoh-umoren-243095206/" aria-label="LinkedIn">
               <Linkedin className="h-4 w-4 mr-2" /> LinkedIn
             </a>
           </Button>
           <Button asChild className="rounded-2xl">
-            <a href="mailto:you@example.com" aria-label="Email">
+            <a href="mailto:joseph.umoren.12@gmail.com" aria-label="Email">
               <Mail className="h-4 w-4 mr-2" /> Contact
             </a>
           </Button>
@@ -134,7 +134,7 @@ function Header() {
 
       <div className="flex flex-wrap items-center gap-3">
         <Button asChild variant="secondary" className="rounded-2xl">
-          <a href="#" aria-label="Resume PDF">Download Résumé</a>
+          <a href="https://docs.google.com/document/d/1VAdotd3MygnOa4_7pvRS0vsd6M8cP7m_DKlYLYLSSdA/export?format=pdf" aria-label="Resume PDF">Download Résumé</a>
         </Button>
         <div className="text-sm text-muted-foreground">
           <span className="font-medium">Focus:</span> ML systems, recsys, and humane AI experiences.
