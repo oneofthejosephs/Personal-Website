@@ -115,17 +115,17 @@ function Header() {
         </div>
         <div className="flex gap-2">
           <Button asChild variant="outline" className="rounded-2xl">
-            <a href="https://github.com/oneofthejosephs" aria-label="GitHub">
+            <a href="https://github.com/oneofthejosephs" target = "blank" aria-label="GitHub">
               <Github className="h-4 w-4 mr-2" /> GitHub
             </a>
           </Button>
           <Button asChild variant="outline" className="rounded-2xl">
-            <a href="https://www.linkedin.com/in/akanimoh-umoren-243095206/" aria-label="LinkedIn">
+            <a href="https://www.linkedin.com/in/akanimoh-umoren-243095206/" target = "blank" aria-label="LinkedIn">
               <Linkedin className="h-4 w-4 mr-2" /> LinkedIn
             </a>
           </Button>
           <Button asChild className="rounded-2xl">
-            <a href="mailto:joseph.umoren.12@gmail.com" aria-label="Email">
+            <a href="mailto:joseph.umoren.12@gmail.com" target = "blank" aria-label="Email">
               <Mail className="h-4 w-4 mr-2" /> Contact
             </a>
           </Button>
