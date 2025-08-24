@@ -15,13 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { BookText, Brain, Code2, ExternalLink, Github, Linkedin, Mail, Search } from "lucide-react";
 
-// -------------------------
-// 🔧 Quick Start Instructions
-// 1) Replace the data in `portfolioItems` below with your own.
-// 2) Update the links in the `Header` component (GitHub, LinkedIn, Email, Resume).
-// 3) Export this page into your framework (e.g., Next.js app) or keep as a single-page site.
-// 4) Optional: Convert poems to Markdown or keep them as strings.
-// -------------------------
+
 type PortfolioItem = {
   id: string;
   category: "Data Science" | "Poetry" | "Projects" | string;
@@ -62,24 +56,46 @@ const portfolioItems:PortfolioItem[] = [
       "Designed random-walk personalization leveraging user-item bipartite graphs; shipped evaluation harness with MAP@K and NDCG@K.",
   },
 
-  // ✍️ Poetry
+  //POETRY
   {
     id: "poem-1",
     category: "Poetry",
-    title: "Static Electricity",
-    summary: "A short poem about small sparks that move big things.",
-    tags: ["Poem", "Free Verse"],
+    title: "I Stick Around Till the Music Stops",
+    summary: "Collection 1, I Stick Around Till the music Stops.",
+    tags: ["Poem"],
     poem:
-      `We call them little—\nthese quicksilver murmurs,\nlike lint clinging to a dark sweater.\nBut touch the doorknob,\nand the room remembers you—\nlight leaping from fingertip\ninto every metal thing.`,
+      `Pay no mind to the fact that we're trampling on each other's toes,
+      \nThe music is playing
+      \nAnd boy is it good!
+      \nSo let's continue to jive.
+      \n
+      \nThe music sounds different to us so our hrythms aren't quite the same,
+      \nBut the music is good!
+      \nSo let's continue to jive.
+      \n
+      \nWe spent the whole session trying to predict each others next move.
+      \nWe got it wrong.
+      \nEvery time.
+      \nBut the music is good!
+      \nSo lets continue to jive.
+      \n
+      \nWhen the band stops playing from fatigue,
+      \nAnd they will.
+      \nI'll skip away thinking very fondly of our frenzied act.
+      \nI should have mentioned,
+      \nI only stick around till the music stops.`,
   },
   {
     id: "poem-2",
     category: "Poetry",
-    title: "Northbound",
-    summary: "Finding a compass where maps fall silent.",
+    title: "Oklahoma",
+    summary: "Collection 1, I Stick Around Till the music Stops.",
     tags: ["Poem", "Journey"],
     poem:
-      `When the road forgets its name,\nI count the mileposts in birdsong.\nSome horizons are questions\nonly footsteps can answer.`,
+      `Powered by the wind like the turbine farms I coast past,
+      \nMy eyes grazing on the green like the cattle I so often see.
+      \nThe Sun and cumulus clouds hang like vivid paintings on the most brilliant blue canvas.
+      \nMy soul is galloping on these endless roads like a foal in a prairie`,
   },
 
   // 🛠️ Other / Projects
@@ -110,7 +126,7 @@ function Header() {
         <div>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Akanimoh Umoren</h1>
           <p className="text-muted-foreground mt-1 max-w-prose">
-            Data Scientist & Poet. I build intelligent systems and write about the spaces between signals.
+            Data Scientist & Poet. Exploring hidden stories from data through analysis, science, and engineering craft.
           </p>
         </div>
         <div className="flex gap-2">
