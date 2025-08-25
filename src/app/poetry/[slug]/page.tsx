@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { poems, type Poem } from "@/content/poetry";
+import { poems } from "@/content/poetry";
 
-export function generateStaticParams(): { slug: string }[] {
-  return poems.map((p: Poem) => ({ slug: p.slug }));
+export function generateStaticParams() {
+  return poems.map((p) => ({ slug: p.slug }));
 }
 
 export async function generateMetadata(
@@ -28,11 +28,13 @@ export default async function PoemPage(
 
   return (
     <main className="mx-auto max-w-3xl p-6 md:p-10">
-      <div className="mb-6 text-sm">
-        <Link href="/poetry" className="text-muted-foreground hover:underline">
-          ← All poems
-        </Link>
-      </div>
+      <nav className="mb-6 text-sm text-muted-foreground flex gap-2">
+        <Link href="/" className="hover:underline">Home</Link>
+        <span>/</span>
+        <Link href="/poetry" className="hover:underline">Poetry</Link>
+        <span>/</span>
+        <span className="text-foreground">{poem.title}</span>
+      </nav>
 
       <h1 className="text-3xl md:text-4xl font-bold tracking-tight">{poem.title}</h1>
       {poem.summary ? <p className="text-muted-foreground mt-2">{poem.summary}</p> : null}
@@ -43,4 +45,5 @@ export default async function PoemPage(
     </main>
   );
 }
+
 
