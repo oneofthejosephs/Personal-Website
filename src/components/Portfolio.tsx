@@ -184,7 +184,7 @@ function useFiltered(items:PortfolioItem[], query:string, activeCategory:string)
   }, [items, query, activeCategory]);
 }
 
-function ItemCard({ item, onOpenPoem }: {item: PortfolioItem;onOpenPoem: (item: PortfolioItem) => void;}) {
+function ItemCard({ item}: {item: PortfolioItem;}) {
   const isPoem = item.category === "Poetry" && item.poem;
   return (
     <motion.div
@@ -298,7 +298,7 @@ const Portfolio: React.FC = () => {
                   </div>
                 ) : (
                   filtered.map((item) => (
-                    <ItemCard key={item.id} item={item} onOpenPoem={openPoem} />
+                    <ItemCard key={item.id} item={item} />
                   ))
                 )}
               </div>
