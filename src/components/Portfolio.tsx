@@ -14,6 +14,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { BookText, Brain, Code2, ExternalLink, Github, Linkedin, Mail, Search } from "lucide-react";
+import Link from "next/link";
 
 
 type PortfolioItem = {
@@ -25,10 +26,11 @@ type PortfolioItem = {
   links?: { demo?: string; repo?: string; paper?: string };
   details?: string;
   poem?: string;
+  slug?: string;
 };
 
 const portfolioItems:PortfolioItem[] = [
-  // 🧠 Data Science
+  //DATA SCIENCE PROJECTS
   {
     id: "ds-ecg",
     category: "Data Science",
@@ -69,7 +71,7 @@ const portfolioItems:PortfolioItem[] = [
       \nAnd boy is it good!
       \nSo let's continue to jive.
       \n
-      \nThe music sounds different to us so our hrythms aren't quite the same,
+      \nThe music sounds different to us so our rhythms aren't quite the same,
       \nBut the music is good!
       \nSo let's continue to jive.
       \n
@@ -83,7 +85,10 @@ const portfolioItems:PortfolioItem[] = [
       \nAnd they will.
       \nI'll skip away thinking very fondly of our frenzied act.
       \nI should have mentioned,
-      \nI only stick around till the music stops.`,
+      \nI only stick around till the music stops.
+      \n
+      \n-A`,
+      slug: "I Stick Around Till the Music Stops"
   },
   {
     id: "poem-2",
@@ -95,7 +100,10 @@ const portfolioItems:PortfolioItem[] = [
       `Powered by the wind like the turbine farms I coast past,
       \nMy eyes grazing on the green like the cattle I so often see.
       \nThe Sun and cumulus clouds hang like vivid paintings on the most brilliant blue canvas.
-      \nMy soul is galloping on these endless roads like a foal in a prairie`,
+      \nMy soul is galloping on these endless roads like a foal in a prairie
+      \n
+      \n-A`,
+      slug: "Oklahoma"
   },
 
   // 🛠️ Other / Projects
@@ -126,7 +134,8 @@ function Header() {
         <div>
           <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Akanimoh Umoren</h1>
           <p className="text-muted-foreground mt-1 max-w-prose">
-            Data Scientist & Poet. Exploring hidden stories from data through analysis, science, and engineering craft.
+            Data Scientist & Poet.
+            Exploring hidden stories from data through analysis, science, and engineering craft.
           </p>
         </div>
         <div className="flex gap-2">
@@ -203,10 +212,10 @@ function ItemCard({ item, onOpenPoem }: {item: PortfolioItem;onOpenPoem: (item: 
 
           {isPoem ? (
             <div className="flex gap-2">
-              <Button className="rounded-2xl" onClick={() => onOpenPoem(item)}>
-                Read Poem
-              </Button>
-            </div>
+            <Button asChild className="rounded-2xl">
+              <Link href={`/poetry/${item.slug}`}>Read Poem</Link>
+            </Button>
+          </div>
           ) : (
             <div className="flex flex-wrap gap-2">
               {item?.links?.demo && (
