@@ -94,9 +94,16 @@
 
 @layer base {
   * {
-    @apply border-border outline-ring/50;
+    @apply border-border;
   }
   body {
     @apply bg-background text-foreground;
   }
+  :focus {
+    @apply outline-none;
+  }
+  :focus-visible {
+    @apply ring-2 ring-ring ring-offset-2;
+  }
 }
+
