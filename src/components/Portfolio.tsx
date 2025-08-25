@@ -184,8 +184,9 @@ function useFiltered(items:PortfolioItem[], query:string, activeCategory:string)
   }, [items, query, activeCategory]);
 }
 
-function ItemCard({ item}: {item: PortfolioItem;}) {
-  const isPoem = item.category === "Poetry" && item.poem;
+function ItemCard({ item }: { item: PortfolioItem }) {
+  const isPoem = item.category === "Poetry" && Boolean(item.slug);
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -212,10 +213,10 @@ function ItemCard({ item}: {item: PortfolioItem;}) {
 
           {isPoem ? (
             <div className="flex gap-2">
-            <Button asChild className="rounded-2xl">
-              <Link href={`/poetry/${item.slug}`}>Read Poem</Link>
-            </Button>
-          </div>
+              <Button asChild className="rounded-2xl">
+                <Link href={`/poetry/${item.slug!}`}>Read Poem</Link>
+              </Button>
+            </div>
           ) : (
             <div className="flex flex-wrap gap-2">
               {item?.links?.demo && (
