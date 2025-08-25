@@ -15,8 +15,11 @@ import {
 } from "@/components/ui/dialog";
 import { BookText, Brain, Code2, ExternalLink, Github, Linkedin, Mail, Search } from "lucide-react";
 import Link from "next/link";
+import { poems } from "@/content/poetry";
 
-
+/* =========================
+   Types
+========================= */
 type PortfolioItem = {
   id: string;
   category: "Data Science" | "Poetry" | "Projects" | string;
@@ -25,12 +28,16 @@ type PortfolioItem = {
   tags?: string[];
   links?: { demo?: string; repo?: string; paper?: string };
   details?: string;
-  poem?: string;
-  slug?: string;
+  slug?: string; // used for Poetry links
 };
 
-const portfolioItems:PortfolioItem[] = [
-  //DATA SCIENCE PROJECTS
+/* =========================
+   Content
+   - DS/Projects defined inline
+   - Poetry mapped from content/poems.ts
+========================= */
+const baseItems: PortfolioItem[] = [
+  // 🧠 Data Science
   {
     id: "ds-ecg",
     category: "Data Science",
@@ -58,55 +65,7 @@ const portfolioItems:PortfolioItem[] = [
       "Designed random-walk personalization leveraging user-item bipartite graphs; shipped evaluation harness with MAP@K and NDCG@K.",
   },
 
-  //POETRY
-  {
-    id: "poem-1",
-    category: "Poetry",
-    title: "I Stick Around Till the Music Stops",
-    summary: "Collection 1, I Stick Around Till the music Stops.",
-    tags: ["Poem"],
-    poem:
-      `Pay no mind to the fact that we're trampling on each other's toes,
-      \nThe music is playing
-      \nAnd boy is it good!
-      \nSo let's continue to jive.
-      \n
-      \nThe music sounds different to us so our rhythms aren't quite the same,
-      \nBut the music is good!
-      \nSo let's continue to jive.
-      \n
-      \nWe spent the whole session trying to predict each others next move.
-      \nWe got it wrong.
-      \nEvery time.
-      \nBut the music is good!
-      \nSo lets continue to jive.
-      \n
-      \nWhen the band stops playing from fatigue,
-      \nAnd they will.
-      \nI'll skip away thinking very fondly of our frenzied act.
-      \nI should have mentioned,
-      \nI only stick around till the music stops.
-      \n
-      \n-A`,
-      slug: "I Stick Around Till the Music Stops"
-  },
-  {
-    id: "poem-2",
-    category: "Poetry",
-    title: "Oklahoma",
-    summary: "Collection 1, I Stick Around Till the music Stops.",
-    tags: ["Poem", "Journey"],
-    poem:
-      `Powered by the wind like the turbine farms I coast past,
-      \nMy eyes grazing on the green like the cattle I so often see.
-      \nThe Sun and cumulus clouds hang like vivid paintings on the most brilliant blue canvas.
-      \nMy soul is galloping on these endless roads like a foal in a prairie
-      \n
-      \n-A`,
-      slug: "Oklahoma"
-  },
-
-  // 🛠️ Other / Projects
+  // 🛠️ Projects
   {
     id: "proj-website",
     category: "Projects",
@@ -120,6 +79,19 @@ const portfolioItems:PortfolioItem[] = [
   },
 ];
 
+// map poems -> portfolio cards
+const poetryCards: PortfolioItem[] = poems.map((p) => ({
+  id: `poem-${p.slug}`,
+  category: "Poetry",
+  title: p.title,
+  summary: p.summary,
+  tags: ["Poem"],
+  slug: p.slug,
+}));
+
+// final list used by the grid
+const portfolioItems: PortfolioItem[] = [...baseItems, ...poetryCards];
+
 const categories = [
   { key: "All", label: "All" },
   { key: "Data Science", label: "Data Science", icon: Brain },
@@ -127,30 +99,50 @@ const categories = [
   { key: "Projects", label: "Projects", icon: Code2 },
 ];
 
+/* =========================
+   Header
+========================= */
 function Header() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">Akanimoh Umoren</h1>
+          <h1 className="text-3xl md:text-4xl font-bold tracking-tight">
+            Akanimoh Umoren
+          </h1>
           <p className="text-muted-foreground mt-1 max-w-prose">
-            Data Scientist & Poet.
-            Exploring hidden stories from data through analysis, science, and engineering craft.
+            Data Scientist & Poet. Exploring hidden stories from data through
+            analysis, science, and engineering craft.
           </p>
         </div>
         <div className="flex gap-2">
           <Button asChild variant="outline" className="rounded-2xl">
-            <a href="https://github.com/oneofthejosephs" target = "blank" aria-label="GitHub">
+            <a
+              href="https://github.com/oneofthejosephs"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub"
+            >
               <Github className="h-4 w-4 mr-2" /> GitHub
             </a>
           </Button>
           <Button asChild variant="outline" className="rounded-2xl">
-            <a href="https://www.linkedin.com/in/akanimoh-umoren-243095206/" target = "blank" aria-label="LinkedIn">
+            <a
+              href="https://www.linkedin.com/in/akanimoh-umoren-243095206/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn"
+            >
               <Linkedin className="h-4 w-4 mr-2" /> LinkedIn
             </a>
           </Button>
           <Button asChild className="rounded-2xl">
-            <a href="mailto:joseph.umoren.12@gmail.com" target = "blank" aria-label="Email">
+            <a
+              href="mailto:joseph.umoren.12@gmail.com"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Email"
+            >
               <Mail className="h-4 w-4 mr-2" /> Contact
             </a>
           </Button>
@@ -159,22 +151,43 @@ function Header() {
 
       <div className="flex flex-wrap items-center gap-3">
         <Button asChild variant="secondary" className="rounded-2xl">
-          <a href="https://docs.google.com/document/d/1VAdotd3MygnOa4_7pvRS0vsd6M8cP7m_DKlYLYLSSdA/export?format=pdf" aria-label="Resume PDF">Download Résumé</a>
+          <a
+            href="https://docs.google.com/document/d/1VAdotd3MygnOa4_7pvRS0vsd6M8cP7m_DKlYLYLSSdA/export?format=pdf"
+            target="_blank"
+            rel="noreferrer"
+            aria-label="Resume PDF"
+          >
+            Download Résumé
+          </a>
         </Button>
         <div className="text-sm text-muted-foreground">
-          <span className="font-medium">Focus:</span> ML systems, recsys, and humane AI experiences.
+          <span className="font-medium">Focus:</span> ML systems, recsys, and
+          humane AI experiences.
         </div>
       </div>
     </div>
   );
 }
 
-function useFiltered(items:PortfolioItem[], query:string, activeCategory:string) {
+/* =========================
+   Helpers
+========================= */
+function useFiltered(
+  items: PortfolioItem[],
+  query: string,
+  activeCategory: string
+) {
   return useMemo(() => {
     const q = query.trim().toLowerCase();
     return items.filter((item) => {
-      const inCategory = activeCategory === "All" || item.category === activeCategory;
-      const hay = [item.title, item.summary, item.details, (item.tags || []).join(" ")]
+      const inCategory =
+        activeCategory === "All" || item.category === activeCategory;
+      const hay = [
+        item.title,
+        item.summary,
+        item.details,
+        (item.tags || []).join(" "),
+      ]
         .filter(Boolean)
         .join(" ")
         .toLowerCase();
@@ -184,6 +197,9 @@ function useFiltered(items:PortfolioItem[], query:string, activeCategory:string)
   }, [items, query, activeCategory]);
 }
 
+/* =========================
+   Card
+========================= */
 function ItemCard({ item }: { item: PortfolioItem }) {
   const isPoem = item.category === "Poetry" && Boolean(item.slug);
 
@@ -197,10 +213,16 @@ function ItemCard({ item }: { item: PortfolioItem }) {
         <CardContent className="p-5 flex flex-col gap-4">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <h3 className="text-lg font-semibold leading-tight">{item.title}</h3>
-              <p className="text-sm text-muted-foreground mt-1">{item.summary}</p>
+              <h3 className="text-lg font-semibold leading-tight">
+                {item.title}
+              </h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                {item.summary}
+              </p>
             </div>
-            <div className="shrink-0 text-xs text-muted-foreground">{item.category}</div>
+            <div className="shrink-0 text-xs text-muted-foreground">
+              {item.category}
+            </div>
           </div>
 
           <div className="flex flex-wrap gap-2">
@@ -248,18 +270,14 @@ function ItemCard({ item }: { item: PortfolioItem }) {
   );
 }
 
+/* =========================
+   Page Component
+========================= */
 const Portfolio: React.FC = () => {
   const [active, setActive] = useState("All");
   const [query, setQuery] = useState("");
-  const [poemOpen, setPoemOpen] = useState(false);
-  const [poemItem, setPoemItem] = useState<PortfolioItem | null>(null);
 
   const filtered = useFiltered(portfolioItems, query, active);
-
-  function openPoem(item: PortfolioItem) {
-    setPoemItem(item);
-    setPoemOpen(true);
-  }
 
   return (
     <div className="mx-auto max-w-6xl p-6 md:p-10">
@@ -293,14 +311,19 @@ const Portfolio: React.FC = () => {
           {categories.map((c) => (
             <TabsContent key={c.key} value={c.key} className="mt-6">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {filtered.length === 0 ? (
+                {filtered
+                  .filter(
+                    (it) => c.key === "All" || it.category === c.key
+                  )
+                  .map((item) => (
+                    <ItemCard key={item.id} item={item} />
+                  ))}
+                {filtered.filter(
+                  (it) => c.key === "All" || it.category === c.key
+                ).length === 0 && (
                   <div className="col-span-full text-sm text-muted-foreground">
                     No matches yet. Try another term or category.
                   </div>
-                ) : (
-                  filtered.map((item) => (
-                    <ItemCard key={item.id} item={item} />
-                  ))
                 )}
               </div>
             </TabsContent>
@@ -309,27 +332,21 @@ const Portfolio: React.FC = () => {
       </div>
 
       <footer className="mt-14 border-t pt-6 text-sm text-muted-foreground flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
-        <div>
-          © {new Date().getFullYear()} Akanimoh Umoren — All rights reserved.
-        </div>
+        <div>© {new Date().getFullYear()} Akanimoh Umoren — All rights reserved.</div>
         <div className="flex items-center gap-4">
-          <span className="inline-flex items-center gap-2"><Brain className="h-4 w-4" /> Data Science</span>
-          <span className="inline-flex items-center gap-2"><BookText className="h-4 w-4" /> Poetry</span>
-          <span className="inline-flex items-center gap-2"><Code2 className="h-4 w-4" /> Projects</span>
+          <span className="inline-flex items-center gap-2">
+            <Brain className="h-4 w-4" /> Data Science
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <BookText className="h-4 w-4" /> Poetry
+          </span>
+          <span className="inline-flex items-center gap-2">
+            <Code2 className="h-4 w-4" /> Projects
+          </span>
         </div>
       </footer>
-
-      <Dialog open={poemOpen} onOpenChange={setPoemOpen}>
-        <DialogContent className="max-w-lg rounded-2xl">
-          <DialogHeader>
-            <DialogTitle>{poemItem?.title}</DialogTitle>
-            <DialogDescription>{poemItem?.summary}</DialogDescription>
-          </DialogHeader>
-          <pre className="whitespace-pre-wrap leading-relaxed text-base">{poemItem?.poem}</pre>
-        </DialogContent>
-      </Dialog>
     </div>
   );
-}
+};
 
 export default Portfolio;
