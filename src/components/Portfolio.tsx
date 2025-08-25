@@ -205,11 +205,12 @@ function ItemCard({ item }: { item: PortfolioItem }) {
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.3 }}
+     initial={{ opacity: 0, y: 12 }}
+     animate={{ opacity: 1, y: 0 }}
+     transition={{ duration: 0.35, ease: "easeOut" }}
+     className="animate-in fade-in-0 slide-in-from-bottom-4 duration-500"
     >
-      <Card className="rounded-2xl shadow-sm hover:shadow-md transition">
+      <Card className="rrounded-2xl shadow-sm transition hover:shadow-md hover:-translate-y-0.5">
         <CardContent className="p-5 flex flex-col gap-4">
           <div className="flex items-start justify-between gap-3">
             <div>
@@ -308,26 +309,34 @@ const Portfolio: React.FC = () => {
             </div>
           </div>
 
-          {categories.map((c) => (
-            <TabsContent key={c.key} value={c.key} className="mt-6">
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-                {filtered
-                  .filter(
-                    (it) => c.key === "All" || it.category === c.key
-                  )
-                  .map((item) => (
-                    <ItemCard key={item.id} item={item} />
-                  ))}
-                {filtered.filter(
-                  (it) => c.key === "All" || it.category === c.key
-                ).length === 0 && (
-                  <div className="col-span-full text-sm text-muted-foreground">
-                    No matches yet. Try another term or category.
-                  </div>
-                )}
-              </div>
-            </TabsContent>
-          ))}
+          {categories.map((c) => {
+            const itemsForTab =
+              c.key === "All" ? filtered : filtered.filter((it) => it.category === c.key);
+
+            return (
+              <TabsContent
+                key={c.key}
+                value={c.key}
+                className="
+                  mt-6
+                  animate-in fade-in-0 slide-in-from-bottom-2
+                  data-[state=inactive]:animate-out data-[state=inactive]:fade-out-0 data-[state=inactive]:slide-out-to-bottom-2
+                  duration-200
+                "
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {itemsForTab.length === 0 ? (
+                    <div className="col-span-full text-sm text-muted-foreground">
+                      No matches yet. Try another term or category.
+                    </div>
+                  ) : (
+                    itemsForTab.map((item) => <ItemCard key={item.id} item={item} />)
+                  )}
+                </div>
+              </TabsContent>
+            );
+          })}
+
         </Tabs>
       </div>
 
