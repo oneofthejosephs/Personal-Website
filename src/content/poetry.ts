@@ -9,10 +9,10 @@ export type Poem = {
 
   export const poems: Poem[] = [
     {
-        slug: "I Stick Around Till the Music Stops",
+        slug: "i-stick-around-till-the-music-stops",
         category: "Poetry",
         title: "I Stick Around Till the Music Stops",
-        summary: "Collection 1, I Stick Around Till the music Stops.",
+        summary: "Collection 1, I Stick Around Till the Music Stops.",
         tags: ["Poem"],
         body:
           `Pay no mind to the fact that we're trampling on each other's toes,
@@ -39,16 +39,16 @@ export type Poem = {
           \n-A`,
       },
       {
-        slug: "Oklahoma",
+        slug: "oklahoma",
         category: "Poetry",
         title: "Oklahoma",
-        summary: "Collection 1, I Stick Around Till the music Stops.",
+        summary: "Collection 1, I Stick Around Till the Music Stops.",
         tags: ["Poem", "Journey"],
         body:
           `Powered by the wind like the turbine farms I coast past,
           \nMy eyes grazing on the green like the cattle I so often see.
           \nThe Sun and cumulus clouds hang like vivid paintings on the most brilliant blue canvas.
-          \nMy soul is galloping on these endless roads like a foal in a prairie
+          \nMy soul is galloping on these endless roads like a foal in a prairie.
           \n
           \n-A`,
       },

@@ -3,6 +3,8 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { poems } from "@/content/poetry";
 
+export const dynamicParams = true;
+
 export function generateStaticParams() {
   return poems.map((p) => ({ slug: p.slug }));
 }
