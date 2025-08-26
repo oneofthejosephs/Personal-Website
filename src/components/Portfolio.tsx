@@ -46,9 +46,8 @@ const baseItems: PortfolioItem[] = [
       "Capstone project comparing k-NN and deep CNNs for ECG-based heart disease detection.",
     tags: ["PyTorch", "KNN", "CNN", "ECG", "Healthcare AI"],
     links: {
-      demo: "#",
-      repo: "#",
-      paper: "#",
+      repo: "https://github.com/oneofthejosephs/ITCS-5356-Project-Report",
+      paper: "https://github.com/oneofthejosephs/ITCS-5356-Project-Report/blob/main/ITCS%205356%20Final%20Report.pdf",
     },
     details:
       "Implemented baseline k-NN and advanced CNN models; evaluated on accuracy, F1, and AUC with robust cross-validation and ablation studies.",
@@ -60,7 +59,10 @@ const baseItems: PortfolioItem[] = [
     summary:
       "Graph-walk recommendations with item-item signals and cold-start handling.",
     tags: ["Recsys", "Random Walk", "Graph", "Python"],
-    links: { demo: "#", repo: "#" },
+    links: { demo: "https://github.com/oneofthejosephs/Movie-Recommendation-System-Analysis/blob/main/Movie_Recommendation.ipynb",
+            repo: "https://github.com/oneofthejosephs/Movie-Recommendation-System-Analysis",
+            paper: "https://github.com/oneofthejosephs/Movie-Recommendation-System-Analysis/blob/main/Recommendation_Report.pdf" 
+    },
     details:
       "Designed random-walk personalization leveraging user-item bipartite graphs; shipped evaluation harness with MAP@K and NDCG@K.",
   },
@@ -161,8 +163,7 @@ function Header() {
           </a>
         </Button>
         <div className="text-sm text-muted-foreground">
-          <span className="font-medium">Focus:</span> ML systems, recsys, and
-          humane AI experiences.
+          <span className="font-medium">Focus:</span> Data Science, Full Stack Software Engineering, Project Management.
         </div>
       </div>
     </div>
