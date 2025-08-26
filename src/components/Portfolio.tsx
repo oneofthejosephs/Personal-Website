@@ -6,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import AboutMe from "@/components/AboutMe";
+import SkillsGrid from "@/components/SkillsGrid";
 import {
   Dialog,
   DialogContent,
@@ -340,7 +342,10 @@ const Portfolio: React.FC = () => {
 
         </Tabs>
       </div>
-
+      
+      <AboutMe />
+      <SkillsGrid />
+      
       <footer className="mt-14 border-t pt-6 text-sm text-muted-foreground flex flex-col md:flex-row items-start md:items-center justify-between gap-3">
         <div>© {new Date().getFullYear()} Akanimoh Umoren — All rights reserved.</div>
         <div className="flex items-center gap-4">
