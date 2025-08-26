@@ -113,8 +113,8 @@ function Header() {
             Akanimoh Umoren
           </h1>
           <p className="text-muted-foreground mt-1 max-w-prose">
-            Data Scientist & Poet. Exploring hidden stories from data through
-            analysis, science, and engineering craft.
+            Data Scientist & Poet. 
+            Exploring hidden stories in data through analysis, science, and engineering craft.
           </p>
         </div>
         <div className="flex gap-2">
@@ -238,28 +238,28 @@ function ItemCard({ item }: { item: PortfolioItem }) {
           {isPoem ? (
             <div className="flex gap-2">
               <Button asChild className="rounded-2xl">
-                <Link href={`/poetry/${item.slug!}`}>Read Poem</Link>
+                <Link href={`/poetry/${item.slug!}`} className="hover:underline">Read Poem</Link>
               </Button>
             </div>
           ) : (
             <div className="flex flex-wrap gap-2">
               {item?.links?.demo && (
                 <Button asChild className="rounded-2xl">
-                  <a href={item.links.demo} target="_blank" rel="noreferrer">
+                  <a href={item.links.demo} target="_blank" rel="noreferrer" className="hover:underline">
                     Live <ExternalLink className="h-4 w-4 ml-2" />
                   </a>
                 </Button>
               )}
               {item?.links?.repo && (
                 <Button asChild variant="outline" className="rounded-2xl">
-                  <a href={item.links.repo} target="_blank" rel="noreferrer">
+                  <a href={item.links.repo} target="_blank" rel="noreferrer" className="hover:underline">
                     Code <ExternalLink className="h-4 w-4 ml-2" />
                   </a>
                 </Button>
               )}
               {item?.links?.paper && (
                 <Button asChild variant="secondary" className="rounded-2xl">
-                  <a href={item.links.paper} target="_blank" rel="noreferrer">
+                  <a href={item.links.paper} target="_blank" rel="noreferrer" className="hover:underline">
                     Paper <ExternalLink className="h-4 w-4 ml-2" />
                   </a>
                 </Button>

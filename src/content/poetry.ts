@@ -9,7 +9,7 @@ export type Poem = {
 
   export const poems: Poem[] = [
     {
-        slug: "poem-1",
+        slug: "I Stick Around Till the Music Stops",
         category: "Poetry",
         title: "I Stick Around Till the Music Stops",
         summary: "Collection 1, I Stick Around Till the music Stops.",
@@ -39,7 +39,7 @@ export type Poem = {
           \n-A`,
       },
       {
-        slug: "poem-2",
+        slug: "Oklahoma",
         category: "Poetry",
         title: "Oklahoma",
         summary: "Collection 1, I Stick Around Till the music Stops.",
