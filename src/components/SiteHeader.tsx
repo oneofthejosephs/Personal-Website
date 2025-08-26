@@ -8,7 +8,8 @@ import { ThemeToggle } from "@/components/ThemeToggle";
 const links = [
   { href: "/", label: "Home" },
   { href: "/poetry", label: "Poetry" },
-  // add more, e.g. { href: "/projects", label: "Projects" }
+  { href: "/#about", label: "About" },
+  { href: "/#skills", label: "Skills" },
 ];
 
 export default function SiteHeader() {
