@@ -4,6 +4,8 @@ import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import { ThemeProvider } from "@/components/ThemeSettings";
 import SwanScroll from "@/components/SwanScroll";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -77,8 +79,10 @@ export default function RootLayout({
           <SiteHeader />
           {children}
           <SwanScroll lightSrc="/black-swan.png"
-                     darkSrc="/white-swan.png" size={60} />
+                     darkSrc="/white-swan.png" size={36} />
         </ThemeProvider>
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
