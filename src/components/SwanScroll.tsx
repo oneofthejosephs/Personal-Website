@@ -51,7 +51,7 @@ export default function SwanScroll({
   // If your art faces LEFT by default:
   //   down  => rotate +90deg   (left -> down, clockwise)
   //   up    => rotate -90deg   (left -> up, counterclockwise)
-  const rotation = dir === "down" ? 90 : -90;
+  const rotation = dir === "down" ? -90 : 90;
 
   return (
     <motion.div

@@ -76,7 +76,8 @@ export default function RootLayout({
         <ThemeProvider>
           <SiteHeader />
           {children}
-          <SwanScroll />
+          <SwanScroll lightSrc="https://www.clipartmax.com/png/small/61-616136_black-swan-wallpaper-black-swan-transparent.png"
+                     darkSrc="/white-swan.png" size={72} />
         </ThemeProvider>
       </body>
     </html>
