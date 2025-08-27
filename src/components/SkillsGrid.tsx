@@ -36,6 +36,16 @@ const SKILLS: SkillCategory[] = [
   }
 ];
 
+const COLORS: Record<string, string> = {
+  "Languages": "bg-blue-100 text-blue-800",
+  "ML / Data": "bg-purple-100 text-purple-800",
+  "Data Ops": "bg-green-100 text-green-800",
+  "Web / Infra": "bg-orange-100 text-orange-800",
+  "Recsys / Signals": "bg-yellow-100 text-yellow-800",
+  "Project Management": "bg-brown-100 text-brown-800",
+  "Strengths": "bg-red-100 text-red-800",
+};
+
 export default function SkillsGrid() {
   return (
     <section id="skills" className="mt-16">
@@ -54,7 +64,7 @@ export default function SkillsGrid() {
               {block.items.map((s) => (
                 <span
                   key={s}
-                  className="inline-flex items-center rounded-xl border px-2.5 py-1 text-xs text-foreground/80"
+                  className={`inline-flex items-center rounded-full px-3 py-1 text-sm font-medium transition-transform transform hover:scale-105 hover:shadow-md ${COLORS[block.title]}`}
                 >
                   {s}
                 </span>
