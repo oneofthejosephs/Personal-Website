@@ -61,10 +61,11 @@ export default function SwanScroll({
     >
       {/* vertical ripple/shadow just to the left of the swan */}
       <motion.div
-        className="absolute right-[calc(100%+6px)] top-1/2 -translate-y-1/2 h-16 w-2 rounded-full
-                   bg-black/15 dark:bg-white/25 blur-[2px]"
-        animate={{ scaleY: [1, 1.15, 1], opacity: [0.22, 0.3, 0.22] }}
-        transition={{ duration: 2.4, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -bottom-1 left-1/2 w-14 h-3 bg-black/20 dark:bg-white/20 rounded-full blur-sm"
+        animate={{x: dir === "down" ? "-50%" : "50%", scale: [1, 1.2, 1], opacity: [0.3, 0.5, 0.3],
+        }}
+        transition={{duration: 2, repeat: Infinity,ease: "easeInOut",
+        }}
       />
 
       {/* click target (image) */}
