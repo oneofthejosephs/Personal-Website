@@ -2,88 +2,70 @@
 
 import { useScroll, useSpring, useTransform, motion } from "framer-motion";
 
+/**
+ * A vertical, right-side "swimming" swan that tracks scroll progress.
+ * Black swan SVG (clean silhouette with orange beak).
+ * Click to smooth-scroll back to top.
+ */
 export default function SwanScroll() {
-  // 0 at page top, 1 at page bottom
   const { scrollYProgress } = useScroll();
-  // smooth the motion a bit
-  const smooth = useSpring(scrollYProgress, { stiffness: 120, damping: 20, mass: 0.2 });
-  // map progress to horizontal position across the pond (as a percentage)
-  const left = useTransform(smooth, (v: number) => `${v * 100}%`);
+  // Smooth the motion
+  const smooth = useSpring(scrollYProgress, { stiffness: 140, damping: 22, mass: 0.25 });
+
+  // Map scroll progress (0..1) to vertical position in viewport (in px)
+  // We keep some padding from top/bottom so the swan never clips.
+  const top = useTransform(smooth, (v: number) => {
+    const viewH = typeof window !== "undefined" ? window.innerHeight : 800;
+    const swanH = 52; // SVG height in px
+    const pad = 16;   // inset from top/bottom
+    const travel = Math.max(0, viewH - swanH - pad * 2);
+    return pad + v * travel;
+  });
 
   return (
-    <div
+    <motion.button
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="Back to top"
+      title="Back to top"
+      style={{ top }}
       className="
-        pointer-events-none fixed inset-x-0 bottom-0 z-50
-        px-6 pb-4
+        fixed right-4 z-50
+        -translate-y-1/2
+        pointer-events-auto
+        focus:outline-none
       "
-      aria-hidden="true"
     >
-      <div
-        className="
-          relative mx-auto max-w-5xl
-          h-14 rounded-2xl border bg-gradient-to-t from-sky-200/70 to-sky-100/70
-          dark:from-sky-900/60 dark:to-sky-800/60
-          shadow-sm
-          overflow-hidden
-        "
+      {/* gentle sideways bob so it feels alive */}
+      <motion.div
+        animate={{ x: [0, 2, 0, -2, 0] }}
+        transition={{ repeat: Infinity, duration: 3.2, ease: "easeInOut" }}
+        className="drop-shadow"
       >
-        {/* decorative gentle 'ripples' */}
-        <div className="absolute inset-0 opacity-40 [background:radial-gradient(circle_at_20%_120%,_white_10%,_transparent_40%),radial-gradient(circle_at_80%_-20%,_white_12%,_transparent_40%)] dark:opacity-20" />
-
-        {/* the swan */}
-        <motion.button
-          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          style={{ left }}
-          className="
-            pointer-events-auto absolute -top-5
-            -translate-x-1/2
-            focus:outline-none
-          "
-          aria-label="Back to top"
-          title="Back to top"
+        {/* Black swan — taller viewBox so head has room, no clipping */}
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="58"
+          height="52"
+          viewBox="0 0 64 64"
+          role="img"
+          aria-hidden="true"
         >
-          <motion.div
-            // gentle bobbing
-            animate={{ y: [0, -3, 0] }}
-            transition={{ repeat: Infinity, duration: 2.2, ease: "easeInOut" }}
-            className="drop-shadow"
-          >
-            {/* inline SVG swan so you don't need an asset file */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="44"
-              height="44"
-              viewBox="0 0 64 64"
-            >
-              {/* body */}
-              <path
-                d="M10 42c6 8 18 10 26 10s18-3 18-9c0-4-3-7-8-8-5-1-9 2-12 1-3-1-4-5-1-8 3-3 8-3 10-9 1-3 0-7-3-8-4-2-8 2-8 6"
-                fill="white"
-                stroke="black"
-                strokeOpacity="0.15"
-                strokeWidth="1.2"
-              />
-              {/* neck & head */}
-              <path
-                d="M30 19c-2 5 3 8 7 9 1-3 1-6-2-8-1-1-3-2-5-1z"
-                fill="white"
-              />
-              {/* beak */}
-              <path d="M38 21c2 0 3 1 4 2-1 1-2 1-4 1z" fill="#f97316" />
-              {/* eye */}
-              <circle cx="36.7" cy="20.6" r="0.9" fill="black" />
-              {/* tiny wake ripple */}
-              <path
-                d="M6 49c6 3 14 4 22 4s16-1 23-4"
-                stroke="white"
-                strokeOpacity="0.7"
-                strokeWidth="1.2"
-                fill="none"
-              />
-            </svg>
-          </motion.div>
-        </motion.button>
-      </div>
-    </div>
+          {/* body & wing (black silhouette) */}
+          <path
+            d="M12 42c6 8 18 11 26 11s18-3 18-9c0-4-3-7-8-8-6-1-9 2-12 1-3-1-4-5-1-8 2-3 6-4 9-8 2-3 2-7-1-9-4-2-9 1-10 5"
+            fill="black"
+          />
+          {/* neck */}
+          <path
+            d="M30 18c-2 6 4 9 8 10 1-3 1-7-2-9-1-1-3-2-6-1z"
+            fill="black"
+          />
+          {/* beak (orange) */}
+          <path d="M39 21c2 0 3 1 4 2-1 1-2 1-4 1z" fill="#f97316" />
+          {/* eye (small gray so it’s visible on black) */}
+          <circle cx="37" cy="20.6" r="1" fill="#e5e7eb" />
+        </svg>
+      </motion.div>
+    </motion.button>
   );
 }
