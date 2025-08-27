@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "@/components/SiteHeader";
 import { ThemeProvider } from "@/components/ThemeSettings";
+import SwanScroll from "@/components/SwanScroll";
+
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -74,6 +76,7 @@ export default function RootLayout({
         <ThemeProvider>
           <SiteHeader />
           {children}
+          <SwanScroll />
         </ThemeProvider>
       </body>
     </html>
