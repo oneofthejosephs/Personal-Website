@@ -6,7 +6,7 @@ export default function AboutMe() {
       {/* Photo */}
       <div className="flex justify-center md:justify-start">
         <img
-          src="/me.jpg" 
+          src="/profilepicture.jpeg" 
           alt="Akanimoh Umoren"
           className="h-40 w-40 md:h-48 md:w-48 rounded-full object-cover border shadow-sm"
         />
