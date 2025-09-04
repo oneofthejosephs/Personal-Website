@@ -154,12 +154,13 @@ function Header() {
       </div>
 
       <div className="flex flex-wrap items-center gap-3">
-        <Button asChild variant="secondary" className="rounded-2xl">
+        <Button asChild variant="secondary" className="rounded-2xl bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 border border-transparent dark:border-black/10">
           <a
             href="https://docs.google.com/document/d/1VAdotd3MygnOa4_7pvRS0vsd6M8cP7m_DKlYLYLSSdA/export?format=pdf"
             target="_blank"
             rel="noreferrer"
             aria-label="Resume PDF"
+            className="inline-flex items-center gap-2"
           >
             Download Résumé
           </a>
