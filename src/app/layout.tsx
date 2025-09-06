@@ -6,7 +6,6 @@ import { ThemeProvider } from "@/components/ThemeSettings";
 import SwanScroll from "@/components/SwanScroll";
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Analytics } from "@vercel/analytics/next"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
