@@ -8,13 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import AboutMe from "@/components/AboutMe";
 import SkillsGrid from "@/components/SkillsGrid";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import {Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle,} from "@/components/ui/dialog";
 import { BookText, Brain, Code2, ExternalLink, Github, Linkedin, Mail, Search } from "lucide-react";
 import Link from "next/link";
 import { poems } from "@/content/poetry";
@@ -141,7 +135,7 @@ function Header() {
               <Linkedin className="h-4 w-4 mr-2" /> LinkedIn
             </a>
           </Button>
-          <Button asChild cclassName="rounded-2xl w-full sm:w-auto" size="sm">
+          <Button asChild className="rounded-2xl w-full sm:w-auto" size="sm">
             <a
               href="mailto:joseph.umoren.12@gmail.com"
               target="_blank"
