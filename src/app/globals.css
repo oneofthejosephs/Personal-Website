@@ -2,6 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 :root {
   --radius: 0.625rem;
 
@@ -107,4 +119,13 @@
   }
 }
 
-html { scroll-behavior: smooth; }
+@layer utilities {
+  .px-safe { padding-left: max(1rem, var(--safe-left)); padding-right: max(1rem, var(--safe-right)); }
+  .py-safe { padding-top: max(1rem, var(--safe-top));  padding-bottom: max(1rem, var(--safe-bottom)); }
+}
+
+@supports (-webkit-tap-highlight-color: transparent) {
+  * { -webkit-tap-highlight-color: rgba(0,0,0,0.08); }
+}
+
+html { -webkit-text-size-adjust: 100%; text-rendering: optimizeLegibility; }

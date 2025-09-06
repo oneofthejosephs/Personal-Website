@@ -1,6 +1,6 @@
 "use client";
 import React, { useMemo, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -18,6 +18,7 @@ import {
 import { BookText, Brain, Code2, ExternalLink, Github, Linkedin, Mail, Search } from "lucide-react";
 import Link from "next/link";
 import { poems } from "@/content/poetry";
+
 
 /* =========================
    Types
@@ -119,8 +120,8 @@ function Header() {
             Exploring hidden stories in data through analysis, science, and engineering craft.
           </p>
         </div>
-        <div className="flex gap-2">
-          <Button asChild variant="outline" className="rounded-2xl">
+        <div className="flex gap-2 flex-wrap sm:flex-nowrap">
+          <Button asChild variant="outline" className="rounded-2xl w-full sm:w-auto" size="sm">
             <a
               href="https://github.com/oneofthejosephs"
               target="_blank"
@@ -130,7 +131,7 @@ function Header() {
               <Github className="h-4 w-4 mr-2" /> GitHub
             </a>
           </Button>
-          <Button asChild variant="outline" className="rounded-2xl">
+          <Button asChild variant="outline" className="rounded-2xl w-full sm:w-auto" size="sm">
             <a
               href="https://www.linkedin.com/in/akanimoh-umoren-243095206/"
               target="_blank"
@@ -140,7 +141,7 @@ function Header() {
               <Linkedin className="h-4 w-4 mr-2" /> LinkedIn
             </a>
           </Button>
-          <Button asChild className="rounded-2xl">
+          <Button asChild cclassName="rounded-2xl w-full sm:w-auto" size="sm">
             <a
               href="mailto:joseph.umoren.12@gmail.com"
               target="_blank"
@@ -153,8 +154,8 @@ function Header() {
         </div>
       </div>
 
-      <div className="flex flex-wrap items-center gap-3">
-        <Button asChild variant="secondary" className="rounded-2xl bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 border border-transparent dark:border-black/10">
+      <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+        <Button asChild variant="secondary" className="rounded-2xl bg-black text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90 border border-transparent dark:border-black/10" size="sm">
           <a
             href="https://docs.google.com/document/d/1VAdotd3MygnOa4_7pvRS0vsd6M8cP7m_DKlYLYLSSdA/export?format=pdf"
             target="_blank"
@@ -206,15 +207,16 @@ function useFiltered(
 ========================= */
 function ItemCard({ item }: { item: PortfolioItem }) {
   const isPoem = item.category === "Poetry" && Boolean(item.slug);
+  const reduce = useReducedMotion();
 
   return (
     <motion.div
-     initial={{ opacity: 0, y: 12 }}
-     animate={{ opacity: 1, y: 0 }}
-     transition={{ duration: 0.35, ease: "easeOut" }}
+     initial={reduce ? false : { opacity: 0, y: 12 }}
+     animate={reduce ? {} : { opacity: 1, y: 0 }}
+     transition={reduce ? { duration: 0 } : { duration: 0.35, ease: "easeOut" }}
      className="animate-in fade-in-0 slide-in-from-bottom-4 duration-500"
     >
-      <Card className="rrounded-2xl shadow-sm transition hover:shadow-md hover:-translate-y-0.5">
+      <Card className="rounded-2xl shadow-sm transition hover:shadow-md hover:-translate-y-0.5">
         <CardContent className="p-5 flex flex-col gap-4">
           <div className="flex items-start justify-between gap-3">
             <div>
@@ -240,28 +242,28 @@ function ItemCard({ item }: { item: PortfolioItem }) {
 
           {isPoem ? (
             <div className="flex gap-2">
-              <Button asChild className="rounded-2xl">
+              <Button asChild className="rounded-2xl active:scale-[.99]" size="sm">
                 <Link href={`/poetry/${item.slug!}`} className="hover:underline">Read Poem</Link>
               </Button>
             </div>
           ) : (
             <div className="flex flex-wrap gap-2">
               {item?.links?.demo && (
-                <Button asChild className="rounded-2xl">
+                <Button asChild className="rounded-2xl active:scale-[.99]" size="sm">
                   <a href={item.links.demo} target="_blank" rel="noreferrer" className="hover:underline">
                     Live <ExternalLink className="h-4 w-4 ml-2" />
                   </a>
                 </Button>
               )}
               {item?.links?.repo && (
-                <Button asChild variant="outline" className="rounded-2xl">
+                <Button asChild variant="outline" className="rounded-2xl active:scale-[.99]" size="sm">
                   <a href={item.links.repo} target="_blank" rel="noreferrer" className="hover:underline">
                     Code <ExternalLink className="h-4 w-4 ml-2" />
                   </a>
                 </Button>
               )}
               {item?.links?.paper && (
-                <Button asChild variant="secondary" className="rounded-2xl">
+                <Button asChild variant="secondary" className="rounded-2xl active:scale-[.99]" size="sm">
                   <a href={item.links.paper} target="_blank" rel="noreferrer" className="hover:underline">
                     Paper <ExternalLink className="h-4 w-4 ml-2" />
                   </a>
@@ -285,31 +287,34 @@ const Portfolio: React.FC = () => {
   const filtered = useFiltered(portfolioItems, query, active);
 
   return (
-    <div className="mx-auto max-w-6xl p-6 md:p-10">
+    <div className="mx-auto max-w-6xl px-4 sm:px-6 md:p-10 py-6">
       <Header />
 
       <div className="mt-8">
         <Tabs value={active} onValueChange={setActive}>
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <TabsList className="rounded-2xl">
-              {categories.map((c) => (
-                <TabsTrigger key={c.key} value={c.key} className="rounded-2xl">
-                  <span className="flex items-center gap-2">
-                    {c.icon ? <c.icon className="h-4 w-4" /> : null}
-                    {c.label}
-                  </span>
-                </TabsTrigger>
-              ))}
-            </TabsList>
+            <div className="sticky top-0 z-20 -mx-4 px-4 py-2 bg-background/80 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+              <TabsList className="rounded-2xl overflow-x-auto no-scrollbar
+                    flex max-w-full gap-1 snap-x snap-mandatory">
+                {categories.map((c) => (
+                  <TabsTrigger key={c.key} value={c.key} className="rounded-2xl shrink-0 snap-start data-[state=active]:ring-1 data-[state=active]:ring-primary">
+                    <span className="flex items-center gap-2">
+                      {c.icon ? <c.icon className="h-4 w-4" /> : null}
+                      {c.label}
+                    </span>
+                  </TabsTrigger>
+                ))}
+              </TabsList>
 
-            <div className="relative w-full md:w-80">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-              <Input
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                placeholder="Search titles, tags, details..."
-                className="pl-9 rounded-2xl"
-              />
+              <div className="relative w-full md:w-80">
+                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+                <Input
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  placeholder="Search titles, tags, details..."
+                  className="pl-9 rounded-2xl"
+                />
+                </div>
             </div>
           </div>
 
